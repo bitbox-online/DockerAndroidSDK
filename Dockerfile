@@ -5,6 +5,9 @@ ENV LANG en_US.UTF-8
 
 RUN apt-get update
 
+# Installing OpenJdk
+RUN apt-get -y install openjdk-8-jdk
+
 # Installing Android SDK
 RUN apt-get -y install android-sdk
 
