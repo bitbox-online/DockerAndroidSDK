@@ -31,3 +31,7 @@ RUN gem install bundler
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 RUN gem install fastlane
+
+# Installing Firebase CLI
+RUN mkdir firebase && cd firebase && wget --quiet --output-document=firebase https://firebase.tools/bin/linux/latest && chmod +x firebase
+ENV PATH "$PATH:/firebase"
