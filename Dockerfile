@@ -16,6 +16,7 @@ RUN echo y | /android-sdk/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOL
 RUN yes | /android-sdk/tools/bin/sdkmanager --licenses
 ENV ANDROID_HOME /android-sdk
 ENV PATH "$PATH:/android-sdk/platform-tools/"
+ENV PATH "$PATH:/android-sdk/build-tools/${ANDROID_BUILD_TOOLS}/"
 
 # Installing build tools, ruby and fastlane
 RUN apt-get install -y \
