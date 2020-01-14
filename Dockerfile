@@ -36,3 +36,6 @@ RUN gem install fastlane
 # Installing Firebase CLI
 RUN mkdir firebase && cd firebase && wget --quiet --output-document=firebase https://firebase.tools/bin/linux/latest && chmod +x firebase
 ENV PATH "$PATH:/firebase"
+
+# Installing GIT
+RUN apt-get install -y git
