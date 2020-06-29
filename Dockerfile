@@ -1,7 +1,5 @@
 FROM ubuntu:18.04
 
-ARG ANDROID_COMPILE_SDK="29"
-ARG ANDROID_BUILD_TOOLS="29.0.2"
 ARG ANDROID_SDK_TOOLS="4333796"
 
 RUN apt-get update
@@ -10,15 +8,30 @@ RUN apt-get update
 RUN apt-get -y install openjdk-8-jdk wget unzip tar lib32stdc++6 lib32z1
 RUN wget --quiet --output-document=android-sdk-tools.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
 RUN unzip -d android-sdk android-sdk-tools.zip && rm android-sdk-tools.zip
-RUN echo y | /android-sdk/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" > /dev/null
+RUN echo "platforms" && \
+    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
+        "platforms;android-30" \
+        "platforms;android-29" \
+        "platforms;android-28" \
+        "platforms;android-27" \
+        "platforms;android-26" \
+        "platforms;android-25" > /dev/null
 RUN echo y | /android-sdk/tools/bin/sdkmanager "platform-tools" > /dev/null
-RUN echo y | /android-sdk/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}" > /dev/null
+RUN echo "build tools 25-30" && \
+    yes | "$ANDROID_HOME"/tools/bin/sdkmanager \
+        "build-tools;30.0.0" \
+        "build-tools;29.0.3" "build-tools;29.0.2" \
+        "build-tools;28.0.3" "build-tools;28.0.2" \
+        "build-tools;27.0.3" "build-tools;27.0.2" "build-tools;27.0.1" \
+        "build-tools;26.0.2" "build-tools;26.0.1" "build-tools;26.0.0" \
+        "build-tools;25.0.3" "build-tools;25.0.2" \
+        "build-tools;25.0.1" "build-tools;25.0.0" > /dev/null
 RUN yes | /android-sdk/tools/bin/sdkmanager --licenses
 ENV ANDROID_HOME /android-sdk
 ENV PATH "$PATH:/android-sdk/platform-tools/"
-ENV PATH "$PATH:/android-sdk/build-tools/${ANDROID_BUILD_TOOLS}/"
+ENV PATH "$PATH:/android-sdk/build-tools/30.0.0/"
 
-# Installing build tools, ruby and fastlane
+# Installing ruby
 RUN apt-get install -y \
   build-essential \
   ruby \
