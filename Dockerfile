@@ -12,20 +12,13 @@ RUN echo "platforms" && \
     yes | /android-sdk/tools/bin/sdkmanager \
         "platforms;android-30" \
         "platforms;android-29" \
-        "platforms;android-28" \
-        "platforms;android-27" \
-        "platforms;android-26" \
-        "platforms;android-25" > /dev/null
+        "platforms;android-28" > /dev/null
 RUN echo y | /android-sdk/tools/bin/sdkmanager "platform-tools" > /dev/null
 RUN echo "build tools 25-30" && \
     yes | /android-sdk/tools/bin/sdkmanager \
         "build-tools;30.0.0" \
         "build-tools;29.0.3" "build-tools;29.0.2" \
-        "build-tools;28.0.3" "build-tools;28.0.2" \
-        "build-tools;27.0.3" "build-tools;27.0.2" "build-tools;27.0.1" \
-        "build-tools;26.0.2" "build-tools;26.0.1" "build-tools;26.0.0" \
-        "build-tools;25.0.3" "build-tools;25.0.2" \
-        "build-tools;25.0.1" "build-tools;25.0.0" > /dev/null
+        "build-tools;28.0.3" "build-tools;28.0.2" > /dev/null
 RUN yes | /android-sdk/tools/bin/sdkmanager --licenses
 ENV ANDROID_HOME /android-sdk
 ENV PATH "$PATH:/android-sdk/platform-tools/"
