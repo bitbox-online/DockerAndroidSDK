@@ -51,3 +51,6 @@ ENV PATH "$PATH:/firebase"
 
 # Installing GIT
 RUN apt-get install -y git
+
+# Installing curl
+RUN apt-get -y install curl
